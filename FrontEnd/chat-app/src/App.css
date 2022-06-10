@@ -1,0 +1,168 @@
+/* header style */
+.header{
+  text-align: center;
+  margin-bottom: 2%;
+  margin-top: 1%;
+}
+
+.container{
+    width: 60%;
+    height: 30rem;
+    margin: auto;
+    border-radius:20px;
+    margin-bottom: 3.6%;
+    position: relative;
+}
+.login{
+    background-color: rgb(13, 13, 14);
+    border: solid rgb(12, 11, 12);
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;            
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.8; 
+    z-index: 2;
+    
+}
+.form{
+  text-align: center;
+  margin-top: 24%;
+  color: white;
+  font-size: 30px;
+}
+.nameInput{
+  width: 30%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+h3 {
+  font-family: 'Mr Dafoe';
+  margin: 0;
+  font-size: 3em;
+  
+  color: white;
+  text-shadow: 0 0 0.05em #fff, 0 0 0.2em #ff8000, 0 0 0.3em #ff8000;
+  /* transform: rotate(-1deg); */
+  
+}
+.chatContainer{
+    /* background-color: rgb(198, 171, 216);
+    border: solid rgb(179, 151, 197); */
+    background-color: #c9ae96;
+    border: solid #a78a6e;
+    opacity: 1;
+    z-index: 1;
+    
+}
+
+.usersDiv{
+  background-color: rgb(202, 201, 150);
+  width: 35%;
+  height: 90%;
+  margin: 2%;
+  margin-right: 1%;
+  border-radius:10px;
+  border: solid rgb(223, 221, 116);
+  overflow-x: hidden;
+  overflow-y:auto;
+  display:inline-block
+}
+
+
+.userImage{
+  float: left;
+  width: 18%;
+  padding: 2%;
+}
+
+.userName{
+  font-size: 25px ;
+  font-family: 'Snell Roundhand, cursive';
+  
+  width: 60%;
+  margin-left: 5%;
+  padding-top: 6%;
+  padding-bottom: 2%;
+  margin-bottom: 6.8%;
+}
+.onlineUsersList{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+}
+.UserItem{
+  background-color: #a78a6e;
+  margin: 2%;
+  padding: 3%;
+  border: #f7ab64 solid;
+  border-radius: 10px;
+
+  
+  /* To make the text unselectable */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.UserItem:hover{
+  background-color: #f7ab64;
+  border: #a78a6e solid;
+  cursor: pointer;
+}
+
+/* --------------------------------------- chat div ------------------------------- */
+.chatDiv{
+  background-color: rgb(202, 201, 150);
+  width: 58%;
+  height: 90%;
+  margin: 2%;
+  margin-left: 0;
+  border-radius:10px;
+  border: solid rgb(223, 221, 116);
+  overflow-x: hidden;
+  overflow-y:auto;
+  display: inline-block;
+}
+.clientImage{
+  float: right;
+  width: 10%;
+  padding: 2%;
+}
+.clientName{
+  font-size: 25px ;
+  font-family: 'Snell Roundhand, cursive';
+ margin-bottom: 3%;
+ padding: 3%;
+}
+.MassagesDiv{
+  background-color: #f3b880;
+  width: 97%;
+  height: 70%;
+  margin: 1%;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-radius:10px;
+  border: solid #a78a6e;
+  overflow-x: hidden;
+  overflow-y:auto;
+  display: inline-block;
+}
+.typeMsg{
+  background-color: rgb(202, 201, 150);
+  width: 90%;
+  /* height: 20%; */
+  margin: 1%;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1%;
+  padding-right: 0;
+  border-radius:12px;
+  border: solid  #a78a6e;
+}
