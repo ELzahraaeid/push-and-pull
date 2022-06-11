@@ -5,7 +5,7 @@ import WhatsAppApp from './components/whatsAppApp';
 
 function App() {
   return (
-    <div className='app'>
+    <div >
       <Header/>
       <WhatsAppApp/>
       

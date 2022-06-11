@@ -5,13 +5,16 @@ import { useState } from 'react';
 function ChatRoom(props) {
 
     const [message, setMessage] = useState('')
+
     const handleSubmit = (e) =>{
         e.preventDefault();
         props.sendingMessage(message)
-        setMessage('')
-        
-        
+        setMessage('')  
     };
+
+    const setTypingMode = (flag)=>{
+            props.TypingUser(props.client.id,flag)
+    }
     return ( 
         <>
         {props.client.username?
@@ -26,9 +29,9 @@ function ChatRoom(props) {
             <hr/>
 
             <div className="MassagesDiv">
-            <ul>
+            <ul className='onlineUsersList'>
                 {
-                    props.currentMessages.map((m, i) => <li key={i}>{m[0]}</li>)
+                    props.currentMessages.map((m, i) => <li key={i}><div className = {(m[1] ? "reciver":"sender")} style={{fontFamily: 'Snell Roundhand, cursive'}}>{m[0]}</div></li>)
                 }
             </ul>
             </div>
@@ -39,13 +42,15 @@ function ChatRoom(props) {
                               required
                               value={message}
                               onChange= {e => setMessage(e.target.value)}
-                            placeholder="Type a Message"
-                            className="typeMsg"
+                              onFocus={()=> setTypingMode(1)}
+                              onBlur = {()=>setTypingMode(0)}
+                              placeholder="Type a Message"
+                              className="typeMsg"
                             />
                             <input type='image' src='https://toppng.com/public/uploads/thumbnail/close-button-camera-button-send-butto-11568894434sickyjwnmf.png' width='5%' style={{float:"right"}} />
                     </form>
             </div>
-        </div>:<h4 className="chatDiv">Welcome</h4>}
+        </div>:<div className="chatDiv welcome">Welcome</div>}
         </>
      );
 }

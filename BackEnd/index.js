@@ -27,6 +27,9 @@ io.on('connection', (socket)=>{
         io.to(payload.id).emit('new-message', {id:socket.id, message:payload.message})
            
     })
+    socket.on('typing-state',(payload) =>{
+        io.to(payload.id).emit('typing-state', payload.state? socket.id: 0)
+    })
     socket.on('disconnect', () => {
         socket.broadcast.emit('delete-user', socket.id);
         onlineUsersForNewUser = onlineUsersForNewUser.filter((user => user.id !== socket.id))

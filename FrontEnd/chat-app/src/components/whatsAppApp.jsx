@@ -16,7 +16,8 @@ function WhatsAppApp() {
     const [client, setClient]= useState({})
     const [messages, setMessages] = useState([])
     const [currentMessages, setCurrentMessages] = useState([])
-    
+    const [currentlyUpdatedID, setCurrentlyUpdatedID] = useState('')
+    const [typingState, setTypingState] = useState('')
     
 
     const handleClient = (new_client) =>{
@@ -31,7 +32,7 @@ function WhatsAppApp() {
         socket.emit('new-message', payload)
         const Update_idx = messages.findIndex(ele => ele.id === client.id)
         let data = messages[Update_idx].messages
-        data.push([msg, 0])   //0 to know who is sender
+        data.push([msg, 0])   //0 for sender
         setMessages([...messages.slice(0,Update_idx),{id:client.id, messages:data}, ...messages.slice(Update_idx+1)])
         setCurrentMessages(messages[Update_idx].messages)
         
@@ -45,6 +46,13 @@ function WhatsAppApp() {
         
     };
 
+    const TypingUser = (ID,typing)=>{
+        socket.emit('typing-state',{id:ID, state:typing})
+        console.log(ID, typing)
+        
+        
+        
+    }
     useEffect(() => {
       
        
@@ -64,16 +72,15 @@ function WhatsAppApp() {
         })  
         socket.on('new-message', (payload) =>{
                 // const Update_idx = messages.findIndex(ele => ele.id === payload.id)
-            
                 //     let data = messages[Update_idx].messages
-                
                 // data.push([payload.message, 1])   //1 to know who is sender
                 // setMessages((mesg => [...mesg.slice(0,Update_idx),{id:client.id, mesg:data}, ...mesg.slice(Update_idx+1)]))
-            
                 setMessages(mesg => ([...mesg.slice(0,mesg.findIndex(ele => ele.id === payload.id)),{id:payload.id, messages:[...(mesg[mesg.findIndex(ele => ele.id === payload.id)].messages),[payload.message, 1]]}, ...mesg.slice(mesg.findIndex(ele => ele.id === payload.id)+1)]))
-
+                setCurrentlyUpdatedID(payload.id)
         })
-        
+        socket.on('typing-state', (id) =>{
+            setTypingState(id)
+        })
         socket.on('delete-user', (UserId) =>{
             setOnlineUsers(online => (online.filter(user => user.id !== UserId)))
             setMessages(mes => (mes.filter(obj => obj.id !== UserId)))
@@ -84,7 +91,12 @@ function WhatsAppApp() {
         
     }, []);
 
-    
+    useEffect(() =>{
+
+        if(messages.length && client.id && (currentlyUpdatedID === client.id)){
+            setCurrentMessages((messages[messages.findIndex(ele => ele.id === client.id)]).messages)
+        }
+    }, [messages, client, currentlyUpdatedID])
     return ( 
         
             
@@ -101,14 +113,15 @@ function WhatsAppApp() {
                               onChange= {e => setUserName(e.target.value)}
                               className='nameInput'
                             />
+                            <input type='image' src='https://cdn-icons-png.flaticon.com/512/938/938925.png' width='5%' />
                             
-                            <input type='image' src='https://cdn-icons-png.flaticon.com/512/938/938925.png' width='5%'  />
                     </form>
             </div>:
             // <UserContext.Provider value={'zzzzzz'}>
                 <AppView userName={userName} onlineUsers={onlineUsers} 
                 handleClient={handleClient} currentClient={client}
                 sendingMessage = {sendingMessage} currentMessages={currentMessages}
+                TypingUser ={TypingUser} typingState = {typingState}
                 />
                
             // </UserContext.Provider>
